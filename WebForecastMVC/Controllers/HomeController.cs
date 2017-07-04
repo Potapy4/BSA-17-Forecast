@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WebForecastMVC.Models.Weather;
 using WebForecastMVC.Services;
 
@@ -25,6 +21,11 @@ namespace WebForecastMVC.Controllers
         public ActionResult GetForecast (string city, int days = 7)
         {
             if (string.IsNullOrWhiteSpace(city))
+            {
+                return RedirectToAction("Index");
+            }
+
+            if(days < 1 || days > 7)
             {
                 return RedirectToAction("Index");
             }
