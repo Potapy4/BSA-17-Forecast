@@ -6,7 +6,7 @@ namespace WebForecastMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly string[] cities = new string[] { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };
+        private readonly string[] cities = new string[] { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };      
 
         // GET: Home/Index
         [HttpGet]
@@ -30,9 +30,18 @@ namespace WebForecastMVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            Weather wr = new ForecastProvider(city, days).GetForecast();
-            ViewBag.Cities = cities;            
+            Weather wr;
+            ViewBag.Cities = cities;
 
+            try
+            {
+                wr = ForecastProvider.GetForecast(city, days);
+            }
+            catch
+            {
+                return View("Error");
+            }
+            
             return View("Index", wr);
         }
 
