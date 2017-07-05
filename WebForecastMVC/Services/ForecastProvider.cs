@@ -1,54 +1,35 @@
 ﻿using System.Net;
 using WebForecastMVC.Models.Weather;
 using Newtonsoft.Json;
+using System;
 
 namespace WebForecastMVC.Services
 {
-    public class ForecastProvider
+    public class ForecastProvider: IForecastProvider
     {
-        private readonly string apiKey;
-        private readonly string apiUrl;
+        private readonly string apiKey = Properties.Settings.Default.apiKey;
 
-        public ForecastProvider(string city, int days)
+        public Weather GetForecast(string city, int days)
         {
-            apiKey = Properties.Settings.Default.apiKey;
-            apiUrl = $"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&cnt={days}&units=metric&APPID={apiKey}";
-        }
-
-        public Weather GetForecast()
-        {
+            string apiUrl = $"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&cnt={days}&units=metric&APPID={apiKey}";
+            string response = null;
             Weather wr;
 
-            try
-            {
-                string jsonData = Request();
-                wr = JsonConvert.DeserializeObject<Weather>(jsonData);
-            }
-            catch
-            {
-                wr = null;
-            }
-
-            return wr;
-
-        }
-
-        private string Request()
-        {
-            string response;
             try
             {
                 using (WebClient wc = new WebClient())
                 {
                     response = wc.DownloadString(apiUrl);
                 }
+
+                wr = JsonConvert.DeserializeObject<Weather>(response);
             }
-            catch
+            catch (Exception)
             {
-                response = null;
+                return null;
             }
 
-            return response;
+            return wr;
         }
     }
 }

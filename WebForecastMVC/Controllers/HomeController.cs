@@ -7,6 +7,12 @@ namespace WebForecastMVC.Controllers
     public class HomeController : Controller
     {
         private readonly string[] cities = new string[] { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };
+        private IForecastProvider provider;
+        
+        public HomeController(IForecastProvider provider)
+        {
+            this.provider = provider;
+        }
 
         // GET: Home/Index
         [HttpGet]
@@ -14,26 +20,26 @@ namespace WebForecastMVC.Controllers
         {
             ViewBag.Cities = cities;
             return View();
-        }       
+        }
 
         // GET: Home/GetForecast
         [HttpGet]
-        public ActionResult GetForecast (string city, int days = 7)
+        public ActionResult GetForecast(string city, int days = 7)
         {
             if (string.IsNullOrWhiteSpace(city))
             {
                 return RedirectToAction("Index");
             }
 
-            if(days < 1 || days > 7)
+            if (days < 1 || days > 7)
             {
                 return RedirectToAction("Index");
             }
 
-            Weather wr = new ForecastProvider(city, days).GetForecast();
-            ViewBag.Cities = cities;            
+            ViewBag.Cities = cities;
+            Weather wr = provider.GetForecast(city, days);
 
-            return View("Index", wr);
+            return wr == null ? View("Error") : View("Index", wr);
         }
 
     }
