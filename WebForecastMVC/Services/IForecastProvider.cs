@@ -2,7 +2,7 @@
 
 namespace WebForecastMVC.Services
 {
-    interface IForecastProvider
+    public interface IForecastProvider
     {
         Weather GetForecast(string city, int days);
     }

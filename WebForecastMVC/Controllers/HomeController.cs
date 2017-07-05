@@ -1,5 +1,4 @@
-﻿using Ninject;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WebForecastMVC.Models.Weather;
 using WebForecastMVC.Services;
 
@@ -9,12 +8,10 @@ namespace WebForecastMVC.Controllers
     {
         private readonly string[] cities = new string[] { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };
         private IForecastProvider provider;
-
-        public HomeController()
+        
+        public HomeController(IForecastProvider provider)
         {
-            IKernel ninjectKernel = new StandardKernel();
-            ninjectKernel.Bind<IForecastProvider>().To<ForecastProvider>();
-            provider = ninjectKernel.Get<IForecastProvider>();
+            this.provider = provider;
         }
 
         // GET: Home/Index
