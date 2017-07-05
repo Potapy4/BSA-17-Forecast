@@ -5,32 +5,31 @@ using System;
 
 namespace WebForecastMVC.Services
 {
-    public static class ForecastProvider
+    public class ForecastProvider: IForecastProvider
     {
-        private static readonly string apiKey = Properties.Settings.Default.apiKey;
+        private readonly string apiKey = Properties.Settings.Default.apiKey;
 
-        public static Weather GetForecast(string city, int days)
+        public Weather GetForecast(string city, int days)
         {
             string apiUrl = $"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&cnt={days}&units=metric&APPID={apiKey}";
             string response = null;
             Weather wr;
 
-            using (WebClient wc = new WebClient())
-            {
-                response = wc.DownloadString(apiUrl);
-            }
-
             try
             {
+                using (WebClient wc = new WebClient())
+                {
+                    response = wc.DownloadString(apiUrl);
+                }
+
                 wr = JsonConvert.DeserializeObject<Weather>(response);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                return null;
             }
 
             return wr;
-
         }
     }
 }
