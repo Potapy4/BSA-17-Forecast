@@ -18,20 +18,20 @@ dtDateTime = dtDateTime.AddSeconds(unixTime).ToLocalTime();
             </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < ViewBag.Days; i++)
+            @foreach (var data in Model.List)
             {
                 <tr>
-                    <td>@UnixToDateString(Model.list[i].dt)</td>
+                    <td>@UnixToDateString(data.Dt)</td>
                     <td>
-                        Min: @Model.list[i].temp.min&deg;<br />
-                        Max: @Model.list[i].temp.max&deg;
+                        Min: @data.Temp.Min&deg;<br />
+                        Max: @data.Temp.Max&deg;
                     </td>
                     <td>
-                        <img src="@string.Format("http://openweathermap.org/img/w/{0}.png", @Model.list[i].weather[0].icon)" />
-                        @Model.list[i].weather[0].main, @Model.list[i].weather[0].description
+                        <img src="@string.Format("http://openweathermap.org/img/w/{0}.png", @data.Weather[0].Icon)" />
+                        @data.Weather[0].Main, @data.Weather[0].Description
                     </td>
-                    <td>@Model.list[i].speed m/s</td>
-                    <td>@Model.list[i].humidity%</td>
+                    <td>@data.Speed m/s</td>
+                    <td>@data.Humidity%</td>
                 </tr>
             }
         </tbody>

@@ -4,10 +4,10 @@ namespace WebForecastMVC.Models.Weather
 {
     public class Weather
     {
-        public City city { get; set; }
-        public string cod { get; set; }
-        public double message { get; set; }
-        public int cnt { get; set; }
-        public List<WeatherDetails> list { get; set; }
+        public City City { get; set; }
+        public string Cod { get; set; }
+        public double Message { get; set; }
+        public int Cnt { get; set; }
+        public List<WeatherDetails> List { get; set; }
     }
 }

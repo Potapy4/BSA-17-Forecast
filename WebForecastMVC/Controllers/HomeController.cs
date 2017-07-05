@@ -30,9 +30,8 @@ namespace WebForecastMVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            Weather wr = new ForecastProvider(city).GetForecast();
-            ViewBag.Cities = cities;
-            ViewBag.Days = days;
+            Weather wr = new ForecastProvider(city, days).GetForecast();
+            ViewBag.Cities = cities;            
 
             return View("Index", wr);
         }

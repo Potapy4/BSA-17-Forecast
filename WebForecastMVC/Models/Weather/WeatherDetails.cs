@@ -4,14 +4,14 @@ namespace WebForecastMVC.Models.Weather
 {
     public class WeatherDetails
     {
-        public int dt { get; set; }
-        public Temperature temp { get; set; }
-        public double pressure { get; set; }
-        public int humidity { get; set; }
-        public List<WeatherInfo> weather { get; set; }
-        public double speed { get; set; }
-        public int deg { get; set; }
-        public int clouds { get; set; }
-        public double? rain { get; set; }
+        public int Dt { get; set; }
+        public Temperature Temp { get; set; }
+        public double Pressure { get; set; }
+        public int Humidity { get; set; }
+        public List<WeatherInfo> Weather { get; set; }
+        public double Speed { get; set; }
+        public int Deg { get; set; }
+        public int Clouds { get; set; }
+        public double? Rain { get; set; }
     }
 }
