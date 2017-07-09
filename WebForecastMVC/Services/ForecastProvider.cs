@@ -9,7 +9,7 @@ namespace WebForecastMVC.Services
     {
         private readonly string apiKey = Properties.Settings.Default.apiKey;
 
-        public Weather GetForecast(string city, int days)
+        public Weather GetForecast(string city, int? days)
         {
             string apiUrl = $"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&cnt={days}&units=metric&APPID={apiKey}";
             string response = null;
