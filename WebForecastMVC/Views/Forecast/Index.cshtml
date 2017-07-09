@@ -1,0 +1,46 @@
+﻿@model WebForecastMVC.Models.Weather.Weather
+
+@helper UnixToDateString(double unixTime)
+{
+// Unix timestamp is seconds past epoch
+System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+dtDateTime = dtDateTime.AddSeconds(unixTime).ToLocalTime();
+    @dtDateTime.ToShortDateString();
+}
+
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>Date</td>
+                    <td>Temperature</td>
+                    <td>Summary</td>
+                    <td>Wind</td>
+                    <td>Humidity</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in Model.List)
+            {
+                    <tr>
+                        <td>@UnixToDateString(data.Dt)</td>
+                        <td>
+                            Min: @data.Temp.Min&deg;<br />
+                            Max: @data.Temp.Max&deg;
+                        </td>
+                        <td>
+                            <img src="@string.Format("http://openweathermap.org/img/w/{0}.png", @data.Weather[0].Icon)" />
+                            @data.Weather[0].Main, @data.Weather[0].Description
+                        </td>
+                        <td>@data.Speed m/s</td>
+                        <td>@data.Humidity%</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <p>
+        @Html.ActionLink("Back to Main", "Index", "Home")
+    </p>
+</div>

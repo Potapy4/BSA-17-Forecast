@@ -4,6 +4,6 @@ namespace WebForecastMVC.Services
 {
     public interface IForecastProvider
     {
-        Weather GetForecast(string city, int days);
+        Weather GetForecast(string city, int? days);
     }
 }
