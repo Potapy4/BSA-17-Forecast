@@ -6,6 +6,7 @@ namespace WebForecastMVC.Models
     {
         public int Id { get; set; }
         public string City { get; set; }
+        public DateTime LogTime { get; set; }
         public DateTime ForecastDate { get; set; }
         public double TempMin { get; set; }
         public double TempMax { get; set; }

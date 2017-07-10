@@ -43,6 +43,7 @@ namespace WebForecastMVC.Controllers
             db.History.Add(new Models.History
             {
                 City = wr.City.Name,
+                LogTime = DateTime.Now,
                 ForecastDate = dt,
                 TempMin = wr.List[0].Temp.Min,
                 TempMax = wr.List[0].Temp.Max,
