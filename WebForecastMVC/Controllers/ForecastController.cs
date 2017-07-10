@@ -9,10 +9,12 @@ namespace WebForecastMVC.Controllers
     public class ForecastController : Controller
     {
         private IForecastProvider provider;
+        private UnitOfWork uow;
 
         public ForecastController(IForecastProvider provider)
         {
             this.provider = provider;
+            uow = new UnitOfWork();
         }
 
         // GET: Forecast
@@ -38,9 +40,7 @@ namespace WebForecastMVC.Controllers
         private void LogInDb(Weather wr)
         {
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(wr.List[0].Dt);
-            DBModel db = new DBModel();
-
-            db.History.Add(new Models.History
+            uow.History.Create(new Models.History()
             {
                 City = wr.City.Name,
                 LogTime = DateTime.Now,
@@ -51,7 +51,8 @@ namespace WebForecastMVC.Controllers
                 Humidity = wr.List[0].Humidity,
                 Summary = wr.List[0].Weather[0].Description
             });
-            db.SaveChanges();
+
+            uow.Save();
         }
     }
 }

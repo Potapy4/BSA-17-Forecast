@@ -170,6 +170,10 @@
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataBase\DBModel.cs" />
+    <Compile Include="DataBase\IRepository.cs" />
+    <Compile Include="DataBase\Repositories\FavoriteCitiesRepository.cs" />
+    <Compile Include="DataBase\Repositories\HistoryRepository.cs" />
+    <Compile Include="DataBase\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
