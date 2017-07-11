@@ -10,7 +10,7 @@ using System;
 
 namespace WebForecast.BLL.Services
 {
-   public class BusinessLogicService : IBusinessLogic
+    public class BusinessLogicService : IBusinessLogic
     {
         private IUnitOfWork Database { get; set; }
 
@@ -24,7 +24,7 @@ namespace WebForecast.BLL.Services
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ValidationException("Name can not be empty!", "");
-            }            
+            }
 
             Database.FavoriteCities.Create(new DAL.Entities.City()
             {
@@ -37,6 +37,12 @@ namespace WebForecast.BLL.Services
         {
             Mapper.Initialize(cfg => cfg.CreateMap<DAL.Entities.City, CityDTO>());
             return Mapper.Map<IEnumerable<DAL.Entities.City>, List<CityDTO>>(Database.FavoriteCities.GetAll());
+        }
+
+        public CityDTO GetFavoriteCityById(int id)
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<DAL.Entities.City, CityDTO>());
+            return Mapper.Map<DAL.Entities.City, CityDTO>(Database.FavoriteCities.Get(id));
         }
 
         public Weather GetForecast(string city, int? days)
@@ -65,7 +71,8 @@ namespace WebForecast.BLL.Services
                 throw new ValidationException("City can not be null!", "");
             }
 
-            DAL.Entities.City ct = Mapper.Map<DAL.Entities.City>(city);
+            Mapper.Initialize(cfg => cfg.CreateMap<CityDTO, DAL.Entities.City>());
+            DAL.Entities.City ct = Mapper.Map<CityDTO, DAL.Entities.City>(city);
 
             Database.FavoriteCities.Update(ct);
             Database.Save();

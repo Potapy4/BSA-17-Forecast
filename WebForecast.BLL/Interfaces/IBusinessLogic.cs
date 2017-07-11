@@ -8,6 +8,7 @@ namespace WebForecast.BLL.Interfaces
     {
         Weather GetForecast(string city, int? days);
         IEnumerable<CityDTO> GetFavoriteCities();
+        CityDTO GetFavoriteCityById(int id);
 
         void AddFavoriteCity(string name);
         void EditFavoriteCity(CityDTO city);
