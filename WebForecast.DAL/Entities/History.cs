@@ -5,7 +5,7 @@ namespace WebForecast.DAL.Entities
     public class History
     {
         public int Id { get; set; }
-        public City City { get; set; }
+        public string City { get; set; }
         public DateTime LogTime { get; set; }
         public DateTime ForecastDate { get; set; }
         public double TempMin { get; set; }

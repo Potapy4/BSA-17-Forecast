@@ -51,7 +51,8 @@ namespace WebForecast.BLL.Services
                 throw new ValidationException("History can not be null!", "");
             }
 
-            DAL.Entities.History hs = Mapper.Map<DAL.Entities.History>(history);
+            Mapper.Initialize(cfg => cfg.CreateMap<HistoryDTO, DAL.Entities.History>());
+            DAL.Entities.History hs = Mapper.Map<HistoryDTO, DAL.Entities.History>(history);
 
             Database.History.Create(hs);
             Database.Save();

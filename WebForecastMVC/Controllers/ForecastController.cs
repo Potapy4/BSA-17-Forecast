@@ -33,7 +33,7 @@ namespace WebForecastMVC.Controllers
                 return View("Error");
             }
 
-            //LogInDb(wr);
+            LogInDb(wr);
             return View(wr);
         }
 
@@ -42,10 +42,9 @@ namespace WebForecastMVC.Controllers
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(wr.List[0].Dt);
 
             Mapper.Initialize(cfg => cfg.CreateMap<HistoryViewModel, HistoryDTO>());
-
             var historyDto = Mapper.Map<HistoryViewModel, HistoryDTO>(new HistoryViewModel()
             {
-                City = new CityDTO() { Name = wr.City.Name },
+                City = wr.City.Name,
                 LogTime = DateTime.Now,
                 ForecastDate = dt,
                 TempMin = wr.List[0].Temp.Min,

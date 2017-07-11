@@ -1,12 +1,11 @@
 ﻿using System;
-using WebForecast.DAL.Entities;
 
 namespace WebForecast.BLL.DTO
 {
     public class HistoryDTO
     {
         public int Id { get; set; }
-        public City City { get; set; }
+        public string City { get; set; }
         public DateTime LogTime { get; set; }
         public DateTime ForecastDate { get; set; }
         public double TempMin { get; set; }
