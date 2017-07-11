@@ -32,8 +32,7 @@ namespace WebForecastMVC.App_Start
 
         private static IKernel CreateKernel()
         {
-            // устанавливаем строку подключения
-            var modules = new INinjectModule[] { new ServiceModule("name=DBModel") };
+            var modules = new INinjectModule[] { new ServiceModule("name=DefaultConnection") };
             var kernel = new StandardKernel(modules);
 
             try
