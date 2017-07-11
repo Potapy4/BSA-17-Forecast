@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -169,30 +172,18 @@
     <Compile Include="Controllers\ForecastController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DataBase\DBModel.cs" />
-    <Compile Include="DataBase\IRepository.cs" />
-    <Compile Include="DataBase\Repositories\FavoriteCitiesRepository.cs" />
-    <Compile Include="DataBase\Repositories\HistoryRepository.cs" />
-    <Compile Include="DataBase\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\ForecastParams.cs" />
-    <Compile Include="Models\History.cs" />
-    <Compile Include="Models\Weather\City.cs" />
-    <Compile Include="Models\Weather\Coord.cs" />
-    <Compile Include="Models\Weather\Temperature.cs" />
-    <Compile Include="Models\Weather\Weather.cs" />
-    <Compile Include="Models\Weather\WeatherDetails.cs" />
-    <Compile Include="Models\Weather\WeatherInfo.cs" />
+    <Compile Include="Models\HistoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Services\ForecastProvider.cs" />
-    <Compile Include="Services\IForecastProvider.cs" />
     <Compile Include="Util\NinjectDependencyResolver.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +249,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebForecast.BLL\WebForecast.BLL.csproj">
+      <Project>{506c4512-e871-489a-b744-c390e8c89e1a}</Project>
+      <Name>WebForecast.BLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

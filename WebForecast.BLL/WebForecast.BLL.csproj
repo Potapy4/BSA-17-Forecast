@@ -55,6 +55,7 @@
     <Compile Include="BusinessModels\OpenWeatherMap\Weather.cs" />
     <Compile Include="BusinessModels\OpenWeatherMap\WeatherDetails.cs" />
     <Compile Include="BusinessModels\OpenWeatherMap\WeatherInfo.cs" />
+    <Compile Include="Infrastructure\ServiceModule.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

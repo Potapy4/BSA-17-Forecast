@@ -1,6 +1,6 @@
-﻿namespace WebForecast.BLL.DTO
+﻿namespace WebForecastMVC.Models
 {
-    public class CityDTO
+    public class CityViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

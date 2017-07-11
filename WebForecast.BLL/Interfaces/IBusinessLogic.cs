@@ -4,7 +4,7 @@ using WebForecast.BLL.DTO;
 
 namespace WebForecast.BLL.Interfaces
 {
-    interface IBusinessLogic
+    public interface IBusinessLogic
     {
         Weather GetForecast(string city, int? days);
         IEnumerable<CityDTO> GetFavoriteCities();

@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
-using WebForecastMVC.DataBase;
+
+/*
 
 namespace WebForecastMVC.Controllers
 {
@@ -19,3 +20,4 @@ namespace WebForecastMVC.Controllers
         }
     }
 }
+*/

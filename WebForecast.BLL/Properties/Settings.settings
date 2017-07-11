@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WebForecast.BLL.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="apiKey" Type="System.String" Scope="User">
+    <Setting Name="apiKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">4ca0f0f0f7e39d870ec2f3c87e5d7c51</Value>
     </Setting>
   </Settings>

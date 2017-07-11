@@ -23,15 +23,12 @@ namespace WebForecast.BLL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4ca0f0f0f7e39d870ec2f3c87e5d7c51")]
         public string apiKey {
             get {
                 return ((string)(this["apiKey"]));
-            }
-            set {
-                this["apiKey"] = value;
             }
         }
     }

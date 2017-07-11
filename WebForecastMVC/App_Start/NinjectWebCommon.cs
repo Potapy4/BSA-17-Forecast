@@ -11,6 +11,8 @@ namespace WebForecastMVC.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using System.Web.Mvc;
+    using WebForecast.BLL.Infrastructure;
+    using Ninject.Modules;
 
     public static class NinjectWebCommon
     {
@@ -30,7 +32,10 @@ namespace WebForecastMVC.App_Start
 
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            // устанавливаем строку подключения
+            var modules = new INinjectModule[] { new ServiceModule("name=DBModel") };
+            var kernel = new StandardKernel(modules);
+
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);

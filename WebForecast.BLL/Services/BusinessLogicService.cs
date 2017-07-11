@@ -9,7 +9,7 @@ using WebForecast.DAL.Interfaces;
 
 namespace WebForecast.BLL.Services
 {
-    class BusinessLogicService : IBusinessLogic
+   public class BusinessLogicService : IBusinessLogic
     {
         private IUnitOfWork Database { get; set; }
 

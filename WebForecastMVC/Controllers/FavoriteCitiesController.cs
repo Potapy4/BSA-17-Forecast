@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using WebForecastMVC.DataBase;
-using WebForecastMVC.Models.Weather;
+
+/*
 
 namespace WebForecastMVC.Controllers
 {
@@ -60,3 +60,4 @@ namespace WebForecastMVC.Controllers
         }
     }
 }
+*/
