@@ -6,6 +6,7 @@ using WebForecast.BLL.DTO;
 using WebForecast.BLL.Infrastructure;
 using WebForecast.BLL.Interfaces;
 using WebForecast.DAL.Interfaces;
+using System;
 
 namespace WebForecast.BLL.Services
 {
@@ -79,6 +80,12 @@ namespace WebForecast.BLL.Services
 
             Database.FavoriteCities.Delete(id);
             Database.Save();
+        }
+
+        public IEnumerable<HistoryDTO> GetAllHistory()
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<DAL.Entities.History, HistoryDTO>());
+            return Mapper.Map<IEnumerable<DAL.Entities.History>, List<HistoryDTO>>(Database.History.GetAll());
         }
     }
 }

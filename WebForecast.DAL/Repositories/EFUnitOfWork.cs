@@ -8,8 +8,8 @@ namespace WebForecast.DAL.Repositories
     public class EFUnitOfWork : IUnitOfWork
     {
         private ForecastContext db;
-        private FavoriteCitiesRepository phoneRepository;
-        private HistoryRepository orderRepository;
+        private FavoriteCitiesRepository favoriteCitiesRepository;
+        private HistoryRepository historyRepository;
         private bool disposed = false;
 
         public EFUnitOfWork(string connectionString)
@@ -21,11 +21,11 @@ namespace WebForecast.DAL.Repositories
         {
             get
             {
-                if (phoneRepository == null)
+                if (favoriteCitiesRepository == null)
                 {
-                    phoneRepository = new FavoriteCitiesRepository(db);
+                    favoriteCitiesRepository = new FavoriteCitiesRepository(db);
                 }
-                return phoneRepository;
+                return favoriteCitiesRepository;
             }
         }
 
@@ -33,11 +33,11 @@ namespace WebForecast.DAL.Repositories
         {
             get
             {
-                if (orderRepository == null)
+                if (historyRepository == null)
                 {
-                    orderRepository = new HistoryRepository(db);
+                    historyRepository = new HistoryRepository(db);
                 }
-                return orderRepository;
+                return historyRepository;
             }
         }
 

@@ -14,5 +14,6 @@ namespace WebForecast.BLL.Interfaces
         void DeleteFavoriteCity(int id);
 
         void LogIntoHistory(HistoryDTO history);
+        IEnumerable<HistoryDTO> GetAllHistory();
     }
 }

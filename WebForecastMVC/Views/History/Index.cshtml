@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebForecastMVC.Models.History>
+﻿@model IEnumerable<WebForecastMVC.Models.HistoryViewModel>
 
 @{
     ViewBag.Title = "History";
@@ -40,7 +40,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.City)
+            @Html.DisplayFor(modelItem => item.City.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LogTime)
