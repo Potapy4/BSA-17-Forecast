@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForecast.DAL", "WebForec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForecast.BLL", "WebForecast.BLL\WebForecast.BLL.csproj", "{506C4512-E871-489A-B744-C390E8C89E1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForecast.TESTS", "WebForecast.TESTS\WebForecast.TESTS.csproj", "{DCD9CE63-8AF2-47A4-A9EA-A0E8A5334638}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{506C4512-E871-489A-B744-C390E8C89E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{506C4512-E871-489A-B744-C390E8C89E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{506C4512-E871-489A-B744-C390E8C89E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCD9CE63-8AF2-47A4-A9EA-A0E8A5334638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCD9CE63-8AF2-47A4-A9EA-A0E8A5334638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCD9CE63-8AF2-47A4-A9EA-A0E8A5334638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCD9CE63-8AF2-47A4-A9EA-A0E8A5334638}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
