@@ -1,17 +1,30 @@
-﻿using System.Web.Mvc;
+﻿using AutoMapper;
+using System.Collections.Generic;
+using System.Web.Mvc;
+using WebForecast.BLL.DTO;
+using WebForecast.BLL.Interfaces;
 using WebForecastMVC.Models;
 
 namespace WebForecastMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly string[] cities = new string[] { "Kiev", "Lviv", "Kharkiv", "Dnipropetrovsk", "Odessa" };        
+        private IBusinessLogic logic;
+
+        public HomeController(IBusinessLogic logic)
+        {
+            this.logic = logic;
+        }
 
         // GET: Home/Index
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.Cities = cities;
+            IEnumerable<CityDTO> citiesDtos = logic.GetFavoriteCities();
+            Mapper.Initialize(cfg => cfg.CreateMap<CityDTO, CityViewModel>());
+            var cityList = Mapper.Map<IEnumerable<CityDTO>, List<CityViewModel>>(citiesDtos);
+
+            ViewBag.Cities = cityList;
             return View();
         }
 
