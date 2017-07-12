@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using WebForecast.BLL.BusinessModels.OpenWeatherMap;
 using WebForecast.BLL.BusinessModels.Services;
@@ -21,7 +22,7 @@ namespace WebForecast.BLL.Services
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                return;
+                throw new ArgumentNullException("Name can't be null!");
             }
 
             Database.FavoriteCities.Create(new DAL.Entities.City()
@@ -52,7 +53,7 @@ namespace WebForecast.BLL.Services
         {
             if (history == null)
             {
-                return;
+                throw new ArgumentNullException("History can't be null!");
             }
 
             Mapper.Initialize(cfg => cfg.CreateMap<HistoryDTO, DAL.Entities.History>());
@@ -66,7 +67,7 @@ namespace WebForecast.BLL.Services
         {
             if (city == null)
             {
-                return;
+                throw new ArgumentNullException("City can't be null!");
             }
 
             Mapper.Initialize(cfg => cfg.CreateMap<CityDTO, DAL.Entities.City>());
@@ -81,7 +82,7 @@ namespace WebForecast.BLL.Services
         {
             if (id <= 0)
             {
-                return;
+                throw new ArgumentException("Id can't be negative!");
             }
 
             Database.FavoriteCities.Delete(id);
