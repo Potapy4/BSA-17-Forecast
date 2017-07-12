@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForecastMVC", "WebForecastMVC\WebForecastMVC.csproj", "{AACA9486-104E-4481-B4BC-7D59917E7624}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForecast.MVC", "WebForecast.MVC\WebForecast.MVC.csproj", "{AACA9486-104E-4481-B4BC-7D59917E7624}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForecast.DAL", "WebForecast.DAL\WebForecast.DAL.csproj", "{9C05EA70-4CF0-4C78-A51B-8034063BDF0B}"
 EndProject
