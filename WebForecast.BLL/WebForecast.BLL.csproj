@@ -65,7 +65,6 @@
     <Compile Include="Services\OpenWeatherMapProvider.cs" />
     <Compile Include="DTO\CityDTO.cs" />
     <Compile Include="DTO\HistoryDTO.cs" />
-    <Compile Include="Infrastructure\ValidationException.cs" />
     <Compile Include="Interfaces\IBusinessLogic.cs" />
     <Compile Include="Interfaces\IForecastProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
