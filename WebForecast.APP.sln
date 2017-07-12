@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForecast.MVC", "WebForecast.MVC\WebForecast.MVC.csproj", "{AACA9486-104E-4481-B4BC-7D59917E7624}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForecast.DAL", "WebForecast.DAL\WebForecast.DAL.csproj", "{9C05EA70-4CF0-4C78-A51B-8034063BDF0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForecast.BLL", "WebForecast.BLL\WebForecast.BLL.csproj", "{506C4512-E871-489A-B744-C390E8C89E1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AACA9486-104E-4481-B4BC-7D59917E7624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AACA9486-104E-4481-B4BC-7D59917E7624}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AACA9486-104E-4481-B4BC-7D59917E7624}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AACA9486-104E-4481-B4BC-7D59917E7624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C05EA70-4CF0-4C78-A51B-8034063BDF0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C05EA70-4CF0-4C78-A51B-8034063BDF0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C05EA70-4CF0-4C78-A51B-8034063BDF0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C05EA70-4CF0-4C78-A51B-8034063BDF0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{506C4512-E871-489A-B744-C390E8C89E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{506C4512-E871-489A-B744-C390E8C89E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{506C4512-E871-489A-B744-C390E8C89E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{506C4512-E871-489A-B744-C390E8C89E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
