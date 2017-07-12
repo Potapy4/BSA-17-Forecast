@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using WebForecast.BLL.DTO;
@@ -29,12 +30,14 @@ namespace WebForecastMVC.Controllers
         // GET: FavoriteCitiesController/AddToFavorite
         public ActionResult AddToFavorite(string city)
         {
-            if (string.IsNullOrWhiteSpace(city))
+            try
             {
-                return RedirectToAction("Index");
-            }           
-
-            logic.AddFavoriteCity(city);
+                logic.AddFavoriteCity(city);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", model: ex.Message);
+            }
 
             return RedirectToAction("Index");
         }
@@ -45,18 +48,25 @@ namespace WebForecastMVC.Controllers
             CityDTO cityDTO = logic.GetFavoriteCityById(id);
             Mapper.Initialize(cfg => cfg.CreateMap<CityDTO, CityViewModel>());
             var city = Mapper.Map<CityDTO, CityViewModel>(cityDTO);
-            
+
             return View(city);
         }
 
         // POST: FavoriteCitiesController/Edit
         [HttpPost]
         public ActionResult Edit(CityViewModel c)
-        {           
+        {
             Mapper.Initialize(cfg => cfg.CreateMap<CityViewModel, CityDTO>());
             var city = Mapper.Map<CityViewModel, CityDTO>(c);
 
-            logic.EditFavoriteCity(city);
+            try
+            {
+                logic.EditFavoriteCity(city);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", model: ex.Message);
+            }
 
             return RedirectToAction("Index");
         }
@@ -64,7 +74,14 @@ namespace WebForecastMVC.Controllers
         // GET: FavoriteCitiesController/Remove
         public ActionResult Remove(int id)
         {
-            logic.DeleteFavoriteCity(id);
+            try
+            {
+                logic.DeleteFavoriteCity(id);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", model: ex.Message);
+            }
 
             return RedirectToAction("Index");
         }
