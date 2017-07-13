@@ -10,31 +10,40 @@ namespace WebForecastMVC.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
-    using System.Web.Mvc;
-    using WebForecast.BLL.Infrastructure;
     using Ninject.Modules;
+    using WebForecast.BLL.Infrastructure;
+    using System.Web.Mvc;
 
-    public static class NinjectWebCommon
+    public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
-        public static void Start()
+        /// <summary>
+        /// Starts the application
+        /// </summary>
+        public static void Start() 
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-
+        
+        /// <summary>
+        /// Stops the application.
+        /// </summary>
         public static void Stop()
         {
             bootstrapper.ShutDown();
         }
-
+        
+        /// <summary>
+        /// Creates the kernel that will manage your application.
+        /// </summary>
+        /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
             var modules = new INinjectModule[] { new ServiceModule("name=DefaultConnection") };
             var kernel = new StandardKernel(modules);
-
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
@@ -50,9 +59,13 @@ namespace WebForecastMVC.App_Start
             }
         }
 
+        /// <summary>
+        /// Load your modules or register your services here!
+        /// </summary>
+        /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
             DependencyResolver.SetResolver(new Util.NinjectDependencyResolver(kernel));
-        }
+        }        
     }
 }
