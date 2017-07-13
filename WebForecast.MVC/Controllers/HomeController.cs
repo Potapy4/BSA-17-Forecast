@@ -32,6 +32,11 @@ namespace WebForecastMVC.Controllers
         [HttpPost]
         public ActionResult Index(ForecastParams p)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
             return RedirectToAction("Index", "Forecast", new { city = p.City, days = p.Days });
         }
     }

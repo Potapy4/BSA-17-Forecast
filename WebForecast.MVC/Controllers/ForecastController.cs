@@ -30,7 +30,7 @@ namespace WebForecastMVC.Controllers
 
             if (wr == null)
             {
-                return View("Error");
+                return View("Error", model: "The problem with forecast provider. Please try again later.");
             }
 
             LogInDb(wr);
