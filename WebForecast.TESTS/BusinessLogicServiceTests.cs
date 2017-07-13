@@ -68,7 +68,7 @@ namespace WebForecast.TESTS
 
             // Assert
             CollectionAssert.IsNotEmpty(resultList);
-            Assert.AreEqual(3, resultList.Count());
+            Assert.AreEqual(dataCity.Count(), resultList.Count());
         }
 
         [Test]
