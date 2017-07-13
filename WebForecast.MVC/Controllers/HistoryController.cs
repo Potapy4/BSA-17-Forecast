@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PagedList;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using WebForecast.BLL.DTO;
@@ -17,13 +18,16 @@ namespace WebForecastMVC.Controllers
         }
 
         // GET: History
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             IEnumerable<HistoryDTO> historyDtos = logic.GetAllHistory();
             Mapper.Initialize(cfg => cfg.CreateMap<HistoryDTO, HistoryViewModel>());
             var history = Mapper.Map<IEnumerable<HistoryDTO>, List<HistoryViewModel>>(historyDtos);
 
-            return View(history);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(history.ToPagedList(pageNumber, pageSize));
         }
     }
 }
