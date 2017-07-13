@@ -1,4 +1,6 @@
-﻿@model IEnumerable<WebForecastMVC.Models.HistoryViewModel>
+﻿@model PagedList.IPagedList<WebForecastMVC.Models.HistoryViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "History";
@@ -12,58 +14,66 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayNameFor(model => model[0].City)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LogTime)
+            @Html.DisplayNameFor(model => model[0].LogTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ForecastDate)
+            @Html.DisplayNameFor(model => model[0].ForecastDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TempMin)
+            @Html.DisplayNameFor(model => model[0].TempMin)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TempMax)
+            @Html.DisplayNameFor(model => model[0].TempMax)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Wind)
+            @Html.DisplayNameFor(model => model[0].Wind)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Humidity)
+            @Html.DisplayNameFor(model => model[0].Humidity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Summary)
+            @Html.DisplayNameFor(model => model[0].Summary)
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LogTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ForecastDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TempMin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TempMax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Wind)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Humidity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Summary)
-        </td>        
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LogTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForecastDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TempMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TempMax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wind)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Humidity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+@if (@Model.PageCount > 0)
+{
+    <p>Page @Model.PageNumber of @Model.PageCount</p>
+}
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
