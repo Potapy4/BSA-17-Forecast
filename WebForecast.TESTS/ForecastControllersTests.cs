@@ -1,7 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.Web.Mvc;
 using WebForecast.BLL.DTO;
 using WebForecast.BLL.Interfaces;
 using WebForecastMVC.Controllers;
@@ -9,7 +8,7 @@ using WebForecastMVC.Controllers;
 namespace WebForecast.TESTS
 {
     [TestFixture]
-    public class ControllersTests
+    public class ForecastControllersTests
     {
         private Mock<IBusinessLogic> logic;
 
@@ -68,28 +67,11 @@ namespace WebForecast.TESTS
             logic.Setup(x => x.LogIntoHistory(It.IsNotNull<HistoryDTO>())).Verifiable();
 
             // Act
-            var result = forecastContoller.Index(city, days);            
+            var result = forecastContoller.Index(city, days);
 
             // Assert
             Assert.IsNotNull(result);
             logic.Verify(x => x.LogIntoHistory(It.IsNotNull<HistoryDTO>()));
-        }
-
-        [Test]
-        public void FavoriteCitiesAddToFavorite_WithValiddParam_CallLogicMethodAndRedirectToIndex()
-        {
-            // Arrange
-            FavoriteCitiesController favoriteCitiesController = new FavoriteCitiesController(logic.Object);
-            logic.Setup(x => x.AddFavoriteCity(It.IsNotNull<string>())).Verifiable();
-
-            // Act
-            RedirectToRouteResult result = favoriteCitiesController.AddToFavorite("Test") as RedirectToRouteResult;
-
-            // Assert
-            logic.Verify(x => x.AddFavoriteCity(It.IsNotNull<string>()));
-            Assert.IsTrue(result.RouteValues.ContainsKey("action"));
-            Assert.AreEqual("Index", result.RouteValues["action"].ToString());
-            Assert.IsNull(result.RouteValues["controller"]); // Must be null, because we in the same controller
         }
     }
 }
