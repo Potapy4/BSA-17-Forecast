@@ -8,7 +8,8 @@
     <div class="col-sm-offset-2 col-sm-8">
         <p>
             @Html.ActionLink("Favorite Cities", "Index", new { controller = "FavoriteCities" }, htmlAttributes: new { @class = "btn btn-default center-block" })<br />
-            @Html.ActionLink("History", "Index", new { controller = "History" }, htmlAttributes: new { @class = "btn btn-default center-block" })
+            @Html.ActionLink("History", "Index", new { controller = "History" }, htmlAttributes: new { @class = "btn btn-default center-block" })<br />
+            @Html.ActionLink("API Docs", "Index", "Help", new { Area = "HelpPage" }, htmlAttributes: new { @class = "btn btn-default center-block" })
         </p>
 
         @using (Html.BeginForm())
