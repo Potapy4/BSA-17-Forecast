@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using WebForecastMVC.App_Start;
 
 namespace WebForecastMVC
 {
@@ -13,7 +12,7 @@ namespace WebForecastMVC
             AreaRegistration.RegisterAllAreas();
 
             // WebAPI
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configure(App_Start.WebApiConfig.Register);
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
