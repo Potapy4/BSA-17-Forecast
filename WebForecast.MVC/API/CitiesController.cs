@@ -64,6 +64,23 @@ namespace WebForecastMVC.API
             return new StatusCodeResult(HttpStatusCode.Created, this);
         }
 
+        // PUT api/cities/5
+        [HttpPut]
+        public StatusCodeResult Put([FromBody]CityViewModel ct)
+        {
+            if (ct == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            Mapper.Initialize(cfg => cfg.CreateMap<CityViewModel, CityDTO>());
+            var city = Mapper.Map<CityViewModel, CityDTO>(ct);
+
+            logic.EditFavoriteCity(city);
+
+            return new StatusCodeResult(HttpStatusCode.OK, this);
+        }
+
         // DELETE api/cities/5
         [HttpDelete]
         public StatusCodeResult Delete(int id)
