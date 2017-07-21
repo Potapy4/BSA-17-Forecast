@@ -4,18 +4,56 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - WebForecast Application</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+
 </head>
-<body>    
-    <div class="container body-content">
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/Home">
+                    <img src="https://blogs.technet.microsoft.com/tasush/wp-content/themes/microsoft/images/ms-logo-gray.svg" alt="Microsoft">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Favorite Cities", "Index", new { controller = "FavoriteCities" })</li>
+                    <li>@Html.ActionLink("History", "Index", new { controller = "History" })</li>
+                    <li>@Html.ActionLink("API Docs", "Index", "Help", new { Area = "HelpPage" }, new { })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - WebForecast Application</p>
-        </footer>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h5>
+                        Microsoft &copy;<br />
+                        Our mission is to empower every person and every organization on the planet to achieve more.
+                    </h5>
+                </div>
+
+                <div class="col-sm-offset-4 col-sm-4">
+                    <h5>
+                        One Microsoft Way<br />
+                        Redmond, WA 98052-6399<br />
+                        +123-456-789
+                    </h5>
+                </div>
+            </div>
+
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

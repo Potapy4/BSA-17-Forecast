@@ -1,6 +1,11 @@
-﻿body {
-    padding-top: 50px;
+﻿html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
     padding-bottom: 20px;
+    margin-bottom: 60px
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +26,27 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.navbar-brand {
+    padding: 0px;
+}
+
+    .navbar-brand > img {
+        height: 100%;
+        padding: 7px 15px;
+        width: auto;
+    }
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+.footer-p {
+    float: left;
 }
