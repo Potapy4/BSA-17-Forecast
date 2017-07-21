@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using WebForecast.BLL.BusinessModels.OpenWeatherMap;
 using WebForecast.BLL.Interfaces;
@@ -19,7 +20,7 @@ namespace WebForecastMVC.API
         {
             if (string.IsNullOrWhiteSpace(city))
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "City name can't be empty!"));
             }
 
             return logic.GetForecast(city, days);
