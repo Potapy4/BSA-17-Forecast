@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 using WebForecast.BLL.DTO;
@@ -35,7 +36,7 @@ namespace WebForecastMVC.API
         {
             if (id <= 0)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Id can't be negative!"));
             }
 
             CityDTO citiesDtos = logic.GetFavoriteCityById(id);
@@ -44,7 +45,7 @@ namespace WebForecastMVC.API
 
             if (city == null)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, "City not found!"));
             }
 
             return city;
@@ -56,7 +57,7 @@ namespace WebForecastMVC.API
         {
             if (string.IsNullOrWhiteSpace(city))
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "City name can't be empty!"));
             }
 
             logic.AddFavoriteCity(city);
@@ -70,7 +71,7 @@ namespace WebForecastMVC.API
         {
             if (ct == null)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "City can't be null!"));
             }
 
             Mapper.Initialize(cfg => cfg.CreateMap<CityViewModel, CityDTO>());
@@ -87,7 +88,7 @@ namespace WebForecastMVC.API
         {
             if (id <= 0)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Id can't be negative!"));
             }
 
             CityViewModel ct = Get(id); // Trying to find
