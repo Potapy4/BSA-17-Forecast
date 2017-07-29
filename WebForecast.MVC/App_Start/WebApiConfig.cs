@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace WebForecastMVC.App_Start
 {
@@ -9,6 +10,10 @@ namespace WebForecastMVC.App_Start
         {
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            // CORS for all WebAPI controllers
+            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");
+            config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
