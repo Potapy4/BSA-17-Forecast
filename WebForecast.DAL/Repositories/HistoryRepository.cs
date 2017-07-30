@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebForecast.DAL.Entities;
 using WebForecast.DAL.EntityFramework;
 using WebForecast.DAL.Interfaces;
@@ -20,9 +21,9 @@ namespace WebForecast.DAL.Repositories
             db.History.Add(item);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            History hs = db.History.FirstOrDefault(x => x.Id == id);
+            History hs = await db.History.FindAsync(id).ConfigureAwait(false);
 
             if (hs != null)
             {

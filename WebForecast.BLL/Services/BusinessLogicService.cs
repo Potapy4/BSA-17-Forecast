@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using WebForecast.BLL.BusinessModels.OpenWeatherMap;
 using WebForecast.BLL.DTO;
 using WebForecast.BLL.Interfaces;
@@ -45,9 +46,9 @@ namespace WebForecast.BLL.Services
             return Mapper.Map<DAL.Entities.City, CityDTO>(Database.FavoriteCities.Get(id));
         }
 
-        public Weather GetForecast(string city, int? days)
+        public async Task<Weather> GetForecast(string city, int? days)
         {
-            return ForecastProvider.GetForecast(city, days);
+            return await ForecastProvider.GetForecast(city, days);
         }
 
         public void LogIntoHistory(HistoryDTO history)
@@ -79,14 +80,14 @@ namespace WebForecast.BLL.Services
 
         }
 
-        public void DeleteFavoriteCity(int id)
+        public async Task DeleteFavoriteCityAsync(int id)
         {
             if (id <= 0)
             {
                 throw new ArgumentException("Id can't be negative!");
             }
 
-            Database.FavoriteCities.Delete(id);
+            await Database.FavoriteCities.DeleteAsync(id);
             Database.Save();
         }
 

@@ -63,7 +63,7 @@ namespace WebForecast.TESTS
             };
             #endregion
 
-            logic.Setup(x => x.GetForecast(It.IsNotNull<string>(), It.IsAny<int?>())).Returns(weather);
+            logic.Setup(x => x.GetForecast(It.IsNotNull<string>(), It.IsAny<int?>()).Result).Returns(weather);
             logic.Setup(x => x.LogIntoHistory(It.IsNotNull<HistoryDTO>())).Verifiable();
 
             // Act

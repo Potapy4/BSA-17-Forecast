@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WebForecast.BLL.DTO;
 using WebForecast.BLL.Interfaces;
@@ -72,11 +73,11 @@ namespace WebForecastMVC.Controllers
         }
 
         // GET: FavoriteCitiesController/Remove
-        public ActionResult Remove(int id)
+        public async Task<ActionResult> Remove(int id)
         {
             try
             {
-                logic.DeleteFavoriteCity(id);
+                await logic.DeleteFavoriteCityAsync(id);
             }
             catch (Exception ex)
             {

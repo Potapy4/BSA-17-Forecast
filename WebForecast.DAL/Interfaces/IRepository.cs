@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace WebForecast.DAL.Interfaces
 {
@@ -8,6 +9,6 @@ namespace WebForecast.DAL.Interfaces
         T Get(int id);        
         void Create(T item);
         void Update(T item);
-        void Delete(int id);
+        Task DeleteAsync(int id);
     }
 }

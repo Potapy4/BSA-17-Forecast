@@ -93,7 +93,7 @@ namespace WebForecastMVC.API
 
             CityViewModel ct = Get(id); // Trying to find
 
-            logic.DeleteFavoriteCity(id);
+            logic.DeleteFavoriteCityAsync(id);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }
