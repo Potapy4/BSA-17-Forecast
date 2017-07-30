@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WebForecast.BLL.BusinessModels.OpenWeatherMap;
 using WebForecast.BLL.DTO;
@@ -18,7 +19,7 @@ namespace WebForecastMVC.Controllers
         }
 
         // GET: Forecast
-        public ActionResult Index(string city, int? days)
+        public async Task<ActionResult> Index(string city, int? days)
         {
             // No access without params
             if (city == null || days == null)
@@ -26,7 +27,7 @@ namespace WebForecastMVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            Weather wr = logic.GetForecast(city, days);
+            Weather wr = await logic.GetForecast(city, days);
 
             if (wr == null)
             {

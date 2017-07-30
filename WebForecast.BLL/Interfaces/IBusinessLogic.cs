@@ -7,7 +7,7 @@ namespace WebForecast.BLL.Interfaces
 {
     public interface IBusinessLogic
     {
-        Weather GetForecast(string city, int? days);
+        Task<Weather> GetForecast(string city, int? days);
         IEnumerable<CityDTO> GetFavoriteCities();
         CityDTO GetFavoriteCityById(int id);
 

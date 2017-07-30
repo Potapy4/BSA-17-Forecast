@@ -46,9 +46,9 @@ namespace WebForecast.BLL.Services
             return Mapper.Map<DAL.Entities.City, CityDTO>(Database.FavoriteCities.Get(id));
         }
 
-        public Weather GetForecast(string city, int? days)
+        public async Task<Weather> GetForecast(string city, int? days)
         {
-            return ForecastProvider.GetForecast(city, days);
+            return await ForecastProvider.GetForecast(city, days);
         }
 
         public void LogIntoHistory(HistoryDTO history)

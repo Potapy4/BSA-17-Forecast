@@ -93,14 +93,14 @@ namespace WebForecast.TESTS
             string city = "Lviv";
             int days = 7;
 
-            forcastProvider.Setup(x => x.GetForecast(city, days)).Returns(new BLL.BusinessModels.OpenWeatherMap.Weather()
+            forcastProvider.Setup(x => x.GetForecast(city, days).Result).Returns(new BLL.BusinessModels.OpenWeatherMap.Weather()
             {
                 City = new BLL.BusinessModels.OpenWeatherMap.City() { Name = city },
                 List = new List<BLL.BusinessModels.OpenWeatherMap.WeatherDetails>(days)
             });
 
             // Act
-            var weather = logic.GetForecast(city, days);
+            var weather = logic.GetForecast(city, days).Result;
 
             // Assert
             Assert.IsNotNull(weather);
