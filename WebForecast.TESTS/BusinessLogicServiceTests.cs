@@ -17,6 +17,7 @@ namespace WebForecast.TESTS
         private Mock<IRepository<City>> cityRepository;
         private Mock<IRepository<History>> historyRepository;
         private Mock<IUnitOfWork> uofMock;
+        private Mock<IForecastProvider> forcastProvider;
         private IBusinessLogic logic;
 
         [SetUp]
@@ -26,7 +27,8 @@ namespace WebForecast.TESTS
             historyRepository = new Mock<IRepository<History>>();
 
             uofMock = new Mock<IUnitOfWork>();
-            logic = new BusinessLogicService(uofMock.Object);
+            forcastProvider = new Mock<IForecastProvider>();
+            logic = new BusinessLogicService(uofMock.Object, forcastProvider.Object);
 
             // Arrange
             uofMock.Setup(x => x.FavoriteCities).Returns(cityRepository.Object);
@@ -91,13 +93,19 @@ namespace WebForecast.TESTS
             string city = "Lviv";
             int days = 7;
 
+            forcastProvider.Setup(x => x.GetForecast(city, days)).Returns(new BLL.BusinessModels.OpenWeatherMap.Weather()
+            {
+                City = new BLL.BusinessModels.OpenWeatherMap.City() { Name = city },
+                List = new List<BLL.BusinessModels.OpenWeatherMap.WeatherDetails>(days)
+            });
+
             // Act
             var weather = logic.GetForecast(city, days);
 
             // Assert
             Assert.IsNotNull(weather);
             Assert.AreEqual(city, weather.City.Name);
-            Assert.AreEqual(days, weather.List.Count);
+            Assert.AreEqual(days, weather.List.Capacity);
         }
 
         [Test]
