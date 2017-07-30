@@ -13,6 +13,7 @@ namespace WebForecast.BLL.Interfaces
 
         void AddFavoriteCity(string name);
         void EditFavoriteCity(CityDTO city);
+        Task DeleteFavoriteCityAsync(int id);
 
         void LogIntoHistory(HistoryDTO history);
         IEnumerable<HistoryDTO> GetAllHistory();
