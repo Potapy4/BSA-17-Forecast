@@ -137,7 +137,7 @@ namespace WebForecast.TESTS
         public void DeleteFavoriteCity_WithNegativeParam_ShouldThrowArgumentExceptionWithMessage()
         {
             // Act and Assert
-            var exception = Assert.Throws<ArgumentException>(() => logic.DeleteFavoriteCity(-1));
+            var exception = Assert.Throws<ArgumentException>(() => logic.DeleteFavoriteCityAsync(-1));
             Assert.AreEqual("Id can't be negative!", exception.Message);
         }
 

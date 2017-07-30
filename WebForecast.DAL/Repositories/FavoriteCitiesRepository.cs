@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebForecast.DAL.Entities;
 using WebForecast.DAL.EntityFramework;
 using WebForecast.DAL.Interfaces;
@@ -24,9 +25,9 @@ namespace WebForecast.DAL.Repositories
             }
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            City c = db.FavoriteCities.Find(id);
+            City c = await db.FavoriteCities.FindAsync(id).ConfigureAwait(false);
             if (c != null)
             {
                 db.FavoriteCities.Remove(c);

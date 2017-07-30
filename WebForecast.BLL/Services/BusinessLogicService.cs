@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using WebForecast.BLL.BusinessModels.OpenWeatherMap;
 using WebForecast.BLL.DTO;
 using WebForecast.BLL.Interfaces;
@@ -79,14 +80,14 @@ namespace WebForecast.BLL.Services
 
         }
 
-        public void DeleteFavoriteCity(int id)
+        public async Task DeleteFavoriteCityAsync(int id)
         {
             if (id <= 0)
             {
                 throw new ArgumentException("Id can't be negative!");
             }
 
-            Database.FavoriteCities.Delete(id);
+            await Database.FavoriteCities.DeleteAsync(id);
             Database.Save();
         }
 
