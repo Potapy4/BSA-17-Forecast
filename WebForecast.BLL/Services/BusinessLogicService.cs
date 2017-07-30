@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using WebForecast.BLL.BusinessModels.OpenWeatherMap;
-using WebForecast.BLL.BusinessModels.Services;
 using WebForecast.BLL.DTO;
 using WebForecast.BLL.Interfaces;
 using WebForecast.DAL.Interfaces;
@@ -12,10 +11,12 @@ namespace WebForecast.BLL.Services
     public class BusinessLogicService : IBusinessLogic
     {
         private IUnitOfWork Database { get; set; }
+        private IForecastProvider ForecastProvider { get; set; }
 
-        public BusinessLogicService(IUnitOfWork uow)
+        public BusinessLogicService(IUnitOfWork uow, IForecastProvider provider)
         {
             Database = uow;
+            ForecastProvider = provider;
         }
 
         public void AddFavoriteCity(string name)
@@ -46,7 +47,7 @@ namespace WebForecast.BLL.Services
 
         public Weather GetForecast(string city, int? days)
         {
-            return new OpenWeatherMapProvider(Properties.Settings.Default.apiKey).GetForecast(city, days);
+            return ForecastProvider.GetForecast(city, days);
         }
 
         public void LogIntoHistory(HistoryDTO history)
