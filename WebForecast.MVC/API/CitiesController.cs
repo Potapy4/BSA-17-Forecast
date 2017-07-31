@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using WebForecast.BLL.DTO;
@@ -53,21 +54,21 @@ namespace WebForecastMVC.API
 
         // POST api/cities
         [HttpPost]
-        public StatusCodeResult Post([FromBody]string city)
+        public async Task<StatusCodeResult> Post([FromBody]string city)
         {
             if (string.IsNullOrWhiteSpace(city))
             {
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "City name can't be empty!"));
             }
 
-            logic.AddFavoriteCity(city);
+            await logic.AddFavoriteCityAsync(city);
 
             return new StatusCodeResult(HttpStatusCode.Created, this);
         }
 
         // PUT api/cities/5
         [HttpPut]
-        public StatusCodeResult Put([FromBody]CityViewModel ct)
+        public async Task<StatusCodeResult> Put([FromBody]CityViewModel ct)
         {
             if (ct == null)
             {
@@ -77,14 +78,14 @@ namespace WebForecastMVC.API
             Mapper.Initialize(cfg => cfg.CreateMap<CityViewModel, CityDTO>());
             var city = Mapper.Map<CityViewModel, CityDTO>(ct);
 
-            logic.EditFavoriteCity(city);
+            await logic.EditFavoriteCityAsync(city);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }
 
         // DELETE api/cities/5
         [HttpDelete]
-        public StatusCodeResult Delete(int id)
+        public async Task<StatusCodeResult> Delete(int id)
         {
             if (id <= 0)
             {
@@ -93,7 +94,7 @@ namespace WebForecastMVC.API
 
             CityViewModel ct = Get(id); // Trying to find
 
-            logic.DeleteFavoriteCityAsync(id);
+            await logic.DeleteFavoriteCityAsync(id);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }

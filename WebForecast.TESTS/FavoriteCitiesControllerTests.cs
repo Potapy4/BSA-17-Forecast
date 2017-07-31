@@ -22,13 +22,13 @@ namespace WebForecast.TESTS
         {
             // Arrange
             FavoriteCitiesController favoriteCitiesController = new FavoriteCitiesController(logic.Object);
-            logic.Setup(x => x.AddFavoriteCity(It.IsNotNull<string>())).Verifiable();
+            logic.Setup(x => x.AddFavoriteCityAsync(It.IsNotNull<string>())).Verifiable();
 
             // Act
-            RedirectToRouteResult result = favoriteCitiesController.AddToFavorite("Test") as RedirectToRouteResult;
+            RedirectToRouteResult result = favoriteCitiesController.AddToFavorite("Test").Result as RedirectToRouteResult; // TODO fix: null reference ???
 
             // Assert
-            logic.Verify(x => x.AddFavoriteCity(It.IsNotNull<string>()));
+            logic.Verify(x => x.AddFavoriteCityAsync(It.IsNotNull<string>()));
             Assert.IsTrue(result.RouteValues.ContainsKey("action"));
             Assert.AreEqual("Index", result.RouteValues["action"].ToString());
             Assert.IsNull(result.RouteValues["controller"]); // Must be null, because we in the same controller

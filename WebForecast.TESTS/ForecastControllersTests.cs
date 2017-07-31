@@ -63,15 +63,15 @@ namespace WebForecast.TESTS
             };
             #endregion
 
-            logic.Setup(x => x.GetForecast(It.IsNotNull<string>(), It.IsAny<int?>())).ReturnsAsync(weather);
-            logic.Setup(x => x.LogIntoHistory(It.IsNotNull<HistoryDTO>())).Verifiable();
+            logic.Setup(x => x.GetForecastAsync(It.IsNotNull<string>(), It.IsAny<int?>())).ReturnsAsync(weather);
+            logic.Setup(x => x.LogIntoHistoryAsync(It.IsNotNull<HistoryDTO>())).Verifiable();
 
             // Act
             var result = forecastContoller.Index(city, days);
 
             // Assert
             Assert.IsNotNull(result);
-            logic.Verify(x => x.LogIntoHistory(It.IsNotNull<HistoryDTO>()));
+            logic.Verify(x => x.LogIntoHistoryAsync(It.IsNotNull<HistoryDTO>()));
         }
     }
 }

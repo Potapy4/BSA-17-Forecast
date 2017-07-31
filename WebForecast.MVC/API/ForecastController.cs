@@ -24,7 +24,7 @@ namespace WebForecastMVC.API
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "City name can't be empty!"));
             }
 
-            return await logic.GetForecast(city, days);
+            return await logic.GetForecastAsync(city, days).ConfigureAwait(false);
         }
     }
 }

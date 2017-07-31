@@ -29,11 +29,11 @@ namespace WebForecastMVC.Controllers
         }
 
         // GET: FavoriteCitiesController/AddToFavorite
-        public ActionResult AddToFavorite(string city)
+        public async Task<ActionResult> AddToFavorite(string city)
         {
             try
             {
-                logic.AddFavoriteCity(city);
+                await logic.AddFavoriteCityAsync(city);
             }
             catch (Exception ex)
             {
@@ -55,14 +55,14 @@ namespace WebForecastMVC.Controllers
 
         // POST: FavoriteCitiesController/Edit
         [HttpPost]
-        public ActionResult Edit(CityViewModel c)
+        public async Task<ActionResult> Edit(CityViewModel c)
         {
             Mapper.Initialize(cfg => cfg.CreateMap<CityViewModel, CityDTO>());
             var city = Mapper.Map<CityViewModel, CityDTO>(c);
 
             try
             {
-                logic.EditFavoriteCity(city);
+                await logic.EditFavoriteCityAsync(city);
             }
             catch (Exception ex)
             {

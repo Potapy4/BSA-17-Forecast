@@ -7,15 +7,15 @@ namespace WebForecast.BLL.Interfaces
 {
     public interface IBusinessLogic
     {
-        Task<Weather> GetForecast(string city, int? days);
+        Task<Weather> GetForecastAsync(string city, int? days);
         IEnumerable<CityDTO> GetFavoriteCities();
         CityDTO GetFavoriteCityById(int id);
 
-        void AddFavoriteCity(string name);
-        void EditFavoriteCity(CityDTO city);
+        Task AddFavoriteCityAsync(string name);
+        Task EditFavoriteCityAsync(CityDTO city);
         Task DeleteFavoriteCityAsync(int id);
 
-        void LogIntoHistory(HistoryDTO history);
+        Task LogIntoHistoryAsync(HistoryDTO history);
         IEnumerable<HistoryDTO> GetAllHistory();
     }
 }

@@ -20,7 +20,7 @@ namespace WebForecast.BLL.Services
             ForecastProvider = provider;
         }
 
-        public void AddFavoriteCity(string name)
+        public async Task AddFavoriteCityAsync(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -31,7 +31,7 @@ namespace WebForecast.BLL.Services
             {
                 Name = name
             });
-            Database.Save();
+            await Database.SaveAsync();
         }
 
         public IEnumerable<CityDTO> GetFavoriteCities()
@@ -46,12 +46,12 @@ namespace WebForecast.BLL.Services
             return Mapper.Map<DAL.Entities.City, CityDTO>(Database.FavoriteCities.Get(id));
         }
 
-        public async Task<Weather> GetForecast(string city, int? days)
+        public async Task<Weather> GetForecastAsync(string city, int? days)
         {
-            return await ForecastProvider.GetForecast(city, days);
+            return await ForecastProvider.GetForecast(city, days).ConfigureAwait(false);
         }
 
-        public void LogIntoHistory(HistoryDTO history)
+        public async Task LogIntoHistoryAsync(HistoryDTO history)
         {
             if (history == null)
             {
@@ -62,10 +62,10 @@ namespace WebForecast.BLL.Services
             DAL.Entities.History hs = Mapper.Map<HistoryDTO, DAL.Entities.History>(history);
 
             Database.History.Create(hs);
-            Database.Save();
+            await Database.SaveAsync();
         }
 
-        public void EditFavoriteCity(CityDTO city)
+        public async Task EditFavoriteCityAsync(CityDTO city)
         {
             if (city == null)
             {
@@ -76,7 +76,7 @@ namespace WebForecast.BLL.Services
             DAL.Entities.City ct = Mapper.Map<CityDTO, DAL.Entities.City>(city);
 
             Database.FavoriteCities.Update(ct);
-            Database.Save();
+            await Database.SaveAsync();
 
         }
 
@@ -88,7 +88,7 @@ namespace WebForecast.BLL.Services
             }
 
             await Database.FavoriteCities.DeleteAsync(id);
-            Database.Save();
+            await Database.SaveAsync();
         }
 
         public IEnumerable<HistoryDTO> GetAllHistory()

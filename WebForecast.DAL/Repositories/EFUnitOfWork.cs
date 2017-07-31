@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using WebForecast.DAL.Entities;
 using WebForecast.DAL.EntityFramework;
 using WebForecast.DAL.Interfaces;
@@ -41,9 +42,9 @@ namespace WebForecast.DAL.Repositories
             }
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         public virtual void Dispose(bool disposing)

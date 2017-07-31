@@ -40,17 +40,17 @@ namespace WebForecast.TESTS
         public void AddFavoriteCity_WithNullParametr_ThrowArgumentNullException()
         {
             // Act and Assert
-            Assert.Throws<ArgumentNullException>(() => logic.AddFavoriteCity(null));
+            Assert.ThrowsAsync<ArgumentNullException>(() => logic.AddFavoriteCityAsync(null));
         }
 
         [Test]
         public void AddFavoriteCity_WithStringParametr_CallSaveMethod()
         {
             // Act
-            logic.AddFavoriteCity("Test");
+            logic.AddFavoriteCityAsync("Test");
 
             // Assert
-            uofMock.Verify(x => x.Save());
+            uofMock.Verify(x => x.SaveAsync());
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace WebForecast.TESTS
             });
 
             // Act
-            var weather = logic.GetForecast(city, days).Result;
+            var weather = logic.GetForecastAsync(city, days).Result;
 
             // Assert
             Assert.IsNotNull(weather);
@@ -113,7 +113,7 @@ namespace WebForecast.TESTS
         public void LogIntoHistory_WithNullArgument_ReturnArgumentNullExceptionWithMessage()
         {
             // Act and Assert
-            var exception = Assert.Throws<ArgumentNullException>(() => logic.LogIntoHistory(null));
+            var exception = Assert.ThrowsAsync<ArgumentNullException>(() => logic.LogIntoHistoryAsync(null));
             Assert.AreEqual("History can't be null!", exception.ParamName);
         }
 
@@ -124,14 +124,14 @@ namespace WebForecast.TESTS
             CityDTO city = new CityDTO() { Id = 1, Name = "Test" };            
 
             uofMock.Setup(x => x.FavoriteCities.Update(It.IsNotNull<City>())).Verifiable();
-            uofMock.Setup(x => x.Save()).Verifiable();
+            uofMock.Setup(x => x.SaveAsync()).Verifiable();
 
             // Act
-            logic.EditFavoriteCity(city);
+            logic.EditFavoriteCityAsync(city);
 
             //Assert
             uofMock.Verify(x => x.FavoriteCities.Update(It.IsNotNull<City>()));
-            uofMock.Verify(x => x.Save());
+            uofMock.Verify(x => x.SaveAsync());
         }
         
         [Test]

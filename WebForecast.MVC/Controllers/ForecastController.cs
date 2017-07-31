@@ -27,18 +27,18 @@ namespace WebForecastMVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            Weather wr = await logic.GetForecast(city, days);
+            Weather wr = await logic.GetForecastAsync(city, days).ConfigureAwait(false);
 
             if (wr == null)
             {
                 return View("Error", model: "The problem with forecast provider. Please try again later.");
             }
 
-            LogInDb(wr);
+            await LogInDb(wr).ConfigureAwait(false);
             return View(wr);
         }
 
-        private void LogInDb(Weather wr)
+        private async Task LogInDb(Weather wr)
         {
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(wr.List[0].Dt);
 
@@ -55,7 +55,7 @@ namespace WebForecastMVC.Controllers
                 Summary = wr.List[0].Weather[0].Description
             });
 
-            logic.LogIntoHistory(historyDto);
+            await logic.LogIntoHistoryAsync(historyDto);
         }
     }
 }

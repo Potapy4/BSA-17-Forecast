@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using WebForecast.DAL.Entities;
 
 namespace WebForecast.DAL.Interfaces
@@ -7,6 +8,6 @@ namespace WebForecast.DAL.Interfaces
     {
         IRepository<City> FavoriteCities { get; }
         IRepository<History> History { get; }
-        void Save();
+        Task SaveAsync();
     }
 }
