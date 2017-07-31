@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebForecast.BLL.DTO;
 using WebForecast.BLL.Interfaces;
 using WebForecast.BLL.Services;
@@ -93,7 +94,7 @@ namespace WebForecast.TESTS
             string city = "Lviv";
             int days = 7;
 
-            forcastProvider.Setup(x => x.GetForecast(city, days).Result).Returns(new BLL.BusinessModels.OpenWeatherMap.Weather()
+            forcastProvider.Setup(x => x.GetForecast(city, days)).ReturnsAsync(new BLL.BusinessModels.OpenWeatherMap.Weather()
             {
                 City = new BLL.BusinessModels.OpenWeatherMap.City() { Name = city },
                 List = new List<BLL.BusinessModels.OpenWeatherMap.WeatherDetails>(days)
@@ -137,7 +138,7 @@ namespace WebForecast.TESTS
         public void DeleteFavoriteCity_WithNegativeParam_ShouldThrowArgumentExceptionWithMessage()
         {
             // Act and Assert
-            var exception = Assert.Throws<ArgumentException>(() => logic.DeleteFavoriteCityAsync(-1));
+            var exception = Assert.ThrowsAsync<ArgumentException>(() => logic.DeleteFavoriteCityAsync(-1));
             Assert.AreEqual("Id can't be negative!", exception.Message);
         }
 
