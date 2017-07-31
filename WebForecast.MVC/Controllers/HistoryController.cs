@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PagedList;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WebForecast.BLL.DTO;
 using WebForecast.BLL.Interfaces;
@@ -18,9 +19,9 @@ namespace WebForecastMVC.Controllers
         }
 
         // GET: History
-        public ActionResult Index(int? page)
+        public async Task<ActionResult> Index(int? page)
         {
-            IEnumerable<HistoryDTO> historyDtos = logic.GetAllHistory();
+            IEnumerable<HistoryDTO> historyDtos = await logic.GetAllHistoryAsync();
             Mapper.Initialize(cfg => cfg.CreateMap<HistoryDTO, HistoryViewModel>());
             var history = Mapper.Map<IEnumerable<HistoryDTO>, List<HistoryViewModel>>(historyDtos);
 

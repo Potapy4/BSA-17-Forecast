@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WebForecast.BLL.DTO;
 using WebForecast.BLL.Interfaces;
@@ -18,9 +19,9 @@ namespace WebForecastMVC.Controllers
 
         // GET: Home/Index
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            IEnumerable<CityDTO> citiesDtos = logic.GetFavoriteCities();
+            IEnumerable<CityDTO> citiesDtos = await logic.GetFavoriteCitiesAsync();
             Mapper.Initialize(cfg => cfg.CreateMap<CityDTO, CityViewModel>());
             var cityList = Mapper.Map<IEnumerable<CityDTO>, List<CityViewModel>>(citiesDtos);
 

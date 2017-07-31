@@ -64,10 +64,10 @@ namespace WebForecast.TESTS
                 new City(){ Id = 3, Name = "Test 3"}
             };
 
-            uofMock.Setup(x => x.FavoriteCities.GetAll()).Returns(dataCity);
+            uofMock.Setup(x => x.FavoriteCities.GetAllAsync()).ReturnsAsync(dataCity);
 
             // Act
-            IEnumerable<CityDTO> resultList = logic.GetFavoriteCities();
+            IEnumerable<CityDTO> resultList = logic.GetFavoriteCitiesAsync().Result;
 
             // Assert
             CollectionAssert.IsNotEmpty(resultList);
@@ -78,10 +78,10 @@ namespace WebForecast.TESTS
         public void GetFavoriteCityById_WithNegativeId_ShouldReturnNull()
         {
             // Arrange
-            uofMock.Setup(x => x.FavoriteCities.Get(It.Is<int>(y => y < 0))).Returns((City)null);
+            uofMock.Setup(x => x.FavoriteCities.GetAsync(It.Is<int>(y => y < 0))).ReturnsAsync((City)null);
 
             // Act
-            CityDTO result = logic.GetFavoriteCityById(-1);
+            CityDTO result = logic.GetFavoriteCityByIdAsync(-1).Result;
 
             // Assert
             Assert.IsNull(result);
@@ -146,7 +146,7 @@ namespace WebForecast.TESTS
         public void GetAllHistory_WithoutEntitiesInDb_ShouldReturnEmptyList()
         {
             // Act
-            IEnumerable<HistoryDTO> historyList = logic.GetAllHistory();
+            IEnumerable<HistoryDTO> historyList = logic.GetAllHistoryAsync().Result;
 
             // Assert
             Assert.IsNotNull(historyList);

@@ -22,9 +22,9 @@ namespace WebForecastMVC.API
 
         // GET api/cities
         [HttpGet]
-        public IEnumerable<CityViewModel> Get()
+        public async Task<IEnumerable<CityViewModel>> Get()
         {
-            IEnumerable<CityDTO> citiesDtos = logic.GetFavoriteCities();
+            IEnumerable<CityDTO> citiesDtos = await logic.GetFavoriteCitiesAsync();
             Mapper.Initialize(cfg => cfg.CreateMap<CityDTO, CityViewModel>());
             var cityList = Mapper.Map<IEnumerable<CityDTO>, List<CityViewModel>>(citiesDtos);
 
@@ -33,14 +33,14 @@ namespace WebForecastMVC.API
 
         // GET api/cities/5
         [HttpGet]
-        public CityViewModel Get(int id)
+        public async Task<CityViewModel> Get(int id)
         {
             if (id <= 0)
             {
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Id can't be negative!"));
             }
 
-            CityDTO citiesDtos = logic.GetFavoriteCityById(id);
+            CityDTO citiesDtos = await logic.GetFavoriteCityByIdAsync(id);
             Mapper.Initialize(cfg => cfg.CreateMap<CityDTO, CityViewModel>());
             var city = Mapper.Map<CityDTO, CityViewModel>(citiesDtos);
 
@@ -61,7 +61,7 @@ namespace WebForecastMVC.API
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "City name can't be empty!"));
             }
 
-            await logic.AddFavoriteCityAsync(city);
+            await logic.AddFavoriteCityAsync(city).ConfigureAwait(false);
 
             return new StatusCodeResult(HttpStatusCode.Created, this);
         }
@@ -78,7 +78,7 @@ namespace WebForecastMVC.API
             Mapper.Initialize(cfg => cfg.CreateMap<CityViewModel, CityDTO>());
             var city = Mapper.Map<CityViewModel, CityDTO>(ct);
 
-            await logic.EditFavoriteCityAsync(city);
+            await logic.EditFavoriteCityAsync(city).ConfigureAwait(false);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }
@@ -92,9 +92,9 @@ namespace WebForecastMVC.API
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Id can't be negative!"));
             }
 
-            CityViewModel ct = Get(id); // Trying to find
+            CityViewModel ct = await Get(id); // Trying to find
 
-            await logic.DeleteFavoriteCityAsync(id);
+            await logic.DeleteFavoriteCityAsync(id).ConfigureAwait(false);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }

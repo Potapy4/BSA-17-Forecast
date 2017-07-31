@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using WebForecast.DAL.Entities;
 using WebForecast.DAL.EntityFramework;
@@ -16,9 +16,9 @@ namespace WebForecast.DAL.Repositories
             this.db = db;
         }
 
-        public void Create(City item)
+        public async Task CreateAsync(City item)
         {
-            City c = db.FavoriteCities.FirstOrDefault(x => x.Name == item.Name);
+            City c = await db.FavoriteCities.FirstOrDefaultAsync(x => x.Name == item.Name);
             if (c == null)
             {
                 db.FavoriteCities.Add(item);
@@ -34,19 +34,19 @@ namespace WebForecast.DAL.Repositories
             }
         }
 
-        public City Get(int id)
+        public async Task<City> GetAsync(int id)
         {
-            return db.FavoriteCities.Find(id);
+            return await db.FavoriteCities.FindAsync(id);
         }
 
-        public IEnumerable<City> GetAll()
+        public async Task<IEnumerable<City>> GetAllAsync()
         {
-            return db.FavoriteCities;
+            return await db.FavoriteCities.ToListAsync();
         }
 
         public void Update(City item)
         {
-            db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(item).State = EntityState.Modified;
         }
     }
 }

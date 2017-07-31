@@ -27,23 +27,23 @@ namespace WebForecast.BLL.Services
                 throw new ArgumentNullException("Name can't be null!");
             }
 
-            Database.FavoriteCities.Create(new DAL.Entities.City()
+            await Database.FavoriteCities.CreateAsync(new DAL.Entities.City()
             {
                 Name = name
-            });
-            await Database.SaveAsync();
+            }).ConfigureAwait(false);
+            await Database.SaveAsync().ConfigureAwait(false);
         }
 
-        public IEnumerable<CityDTO> GetFavoriteCities()
+        public async Task<IEnumerable<CityDTO>> GetFavoriteCitiesAsync()
         {
             Mapper.Initialize(cfg => cfg.CreateMap<DAL.Entities.City, CityDTO>());
-            return Mapper.Map<IEnumerable<DAL.Entities.City>, List<CityDTO>>(Database.FavoriteCities.GetAll());
+            return Mapper.Map<IEnumerable<DAL.Entities.City>, List<CityDTO>>(await Database.FavoriteCities.GetAllAsync());
         }
 
-        public CityDTO GetFavoriteCityById(int id)
+        public async Task<CityDTO> GetFavoriteCityByIdAsync(int id)
         {
             Mapper.Initialize(cfg => cfg.CreateMap<DAL.Entities.City, CityDTO>());
-            return Mapper.Map<DAL.Entities.City, CityDTO>(Database.FavoriteCities.Get(id));
+            return Mapper.Map<DAL.Entities.City, CityDTO>(await Database.FavoriteCities.GetAsync(id));
         }
 
         public async Task<Weather> GetForecastAsync(string city, int? days)
@@ -61,8 +61,8 @@ namespace WebForecast.BLL.Services
             Mapper.Initialize(cfg => cfg.CreateMap<HistoryDTO, DAL.Entities.History>());
             DAL.Entities.History hs = Mapper.Map<HistoryDTO, DAL.Entities.History>(history);
 
-            Database.History.Create(hs);
-            await Database.SaveAsync();
+            await Database.History.CreateAsync(hs).ConfigureAwait(false);
+            await Database.SaveAsync().ConfigureAwait(false);
         }
 
         public async Task EditFavoriteCityAsync(CityDTO city)
@@ -76,7 +76,7 @@ namespace WebForecast.BLL.Services
             DAL.Entities.City ct = Mapper.Map<CityDTO, DAL.Entities.City>(city);
 
             Database.FavoriteCities.Update(ct);
-            await Database.SaveAsync();
+            await Database.SaveAsync().ConfigureAwait(false);
 
         }
 
@@ -91,10 +91,10 @@ namespace WebForecast.BLL.Services
             await Database.SaveAsync();
         }
 
-        public IEnumerable<HistoryDTO> GetAllHistory()
+        public async Task<IEnumerable<HistoryDTO>> GetAllHistoryAsync()
         {
             Mapper.Initialize(cfg => cfg.CreateMap<DAL.Entities.History, HistoryDTO>());
-            return Mapper.Map<IEnumerable<DAL.Entities.History>, List<HistoryDTO>>(Database.History.GetAll());
+            return Mapper.Map<IEnumerable<DAL.Entities.History>, List<HistoryDTO>>(await Database.History.GetAllAsync());
         }
     }
 }

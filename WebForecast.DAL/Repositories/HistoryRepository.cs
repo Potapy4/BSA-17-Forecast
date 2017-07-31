@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using WebForecast.DAL.Entities;
 using WebForecast.DAL.EntityFramework;
@@ -16,9 +16,9 @@ namespace WebForecast.DAL.Repositories
             this.db = db;
         }
 
-        public void Create(History item)
+        public async Task CreateAsync(History item)
         {
-            db.History.Add(item);
+            await Task.Run(() => db.History.Add(item)).ConfigureAwait(false);
         }
 
         public async Task DeleteAsync(int id)
@@ -31,19 +31,19 @@ namespace WebForecast.DAL.Repositories
             }
         }
 
-        public History Get(int id)
+        public async Task<History> GetAsync(int id)
         {
-            return db.History.Find(id);
+            return await db.History.FindAsync(id).ConfigureAwait(false);
         }
 
-        public IEnumerable<History> GetAll()
+        public async Task<IEnumerable<History>> GetAllAsync()
         {
-            return db.History;
+            return await db.History.ToListAsync();
         }
 
         public void Update(History item)
         {
-            db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(item).State = EntityState.Modified;
         }
     }
 }

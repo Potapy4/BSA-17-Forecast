@@ -19,9 +19,9 @@ namespace WebForecastMVC.Controllers
         }
 
         // GET: FavoriteCitiesController/Index
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            IEnumerable<CityDTO> citiesDtos = logic.GetFavoriteCities();
+            IEnumerable<CityDTO> citiesDtos = await logic.GetFavoriteCitiesAsync();
             Mapper.Initialize(cfg => cfg.CreateMap<CityDTO, CityViewModel>());
             var cityList = Mapper.Map<IEnumerable<CityDTO>, List<CityViewModel>>(citiesDtos);
 
@@ -33,7 +33,7 @@ namespace WebForecastMVC.Controllers
         {
             try
             {
-                await logic.AddFavoriteCityAsync(city);
+                await logic.AddFavoriteCityAsync(city).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -44,9 +44,9 @@ namespace WebForecastMVC.Controllers
         }
 
         // GET: FavoriteCitiesController/Edit
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            CityDTO cityDTO = logic.GetFavoriteCityById(id);
+            CityDTO cityDTO = await logic.GetFavoriteCityByIdAsync(id);
             Mapper.Initialize(cfg => cfg.CreateMap<CityDTO, CityViewModel>());
             var city = Mapper.Map<CityDTO, CityViewModel>(cityDTO);
 
@@ -62,7 +62,7 @@ namespace WebForecastMVC.Controllers
 
             try
             {
-                await logic.EditFavoriteCityAsync(city);
+                await logic.EditFavoriteCityAsync(city).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -77,7 +77,7 @@ namespace WebForecastMVC.Controllers
         {
             try
             {
-                await logic.DeleteFavoriteCityAsync(id);
+                await logic.DeleteFavoriteCityAsync(id).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
